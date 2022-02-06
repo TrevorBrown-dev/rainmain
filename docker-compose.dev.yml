@@ -1,0 +1,23 @@
+version: '3'
+services:
+    db:
+        image: postgres:latest
+        volumes:
+            - ./db/data/postgres:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=ror2api
+        restart: always
+
+    api:
+        build:
+            context: ./api
+            dockerfile: Dockerfile.dev
+        restart: always
+        volumes:
+            - ./api/src:/usr/app/src
+            - /usr/app/node_modules
+        links:
+            - 'db'
+        command: npm run dev

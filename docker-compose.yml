@@ -1,0 +1,18 @@
+version: '3'
+services:
+    db:
+        image: trevorbrowndev/rainmain/db:latest
+        build:
+            context: ./db
+            dockerfile: Dockerfile
+        volumes:
+            - db_data:/var/lib/postgresql/data
+    api:
+        image: trevorbrowndev/rainmain/api:latest
+        build:
+            context: ./api
+            dockerfile: Dockerfile
+        links:
+            - 'db'
+volumes:
+    db_data:
