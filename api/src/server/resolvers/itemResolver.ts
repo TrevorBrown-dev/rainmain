@@ -1,5 +1,6 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { retrieveDocument } from "../../utils/retrieveDocument";
+import { spellCheck } from "../../utils/spellCheck";
 import { Item } from "../entities/Item";
 
 @Resolver(Item)
@@ -15,9 +16,11 @@ export class ItemResolver {
     }
 
     @Mutation(() => Item)
-    async pullItem(@Arg("name") name: string): Promise<Item> {
-        //! implement spellChecking
+    async pullItem(@Arg("name") weakName: string): Promise<Item> {
+        //Check weakName against list of all names and return the best match
+        const { name } = spellCheck(weakName, await Item.find());
         
+        //Pull best match item
         const item = await Item.findOne({ where: { name } });
         if (!item)
             throw {
@@ -28,7 +31,12 @@ export class ItemResolver {
                     },
                 ],
             };
+
+        //Make item name useable in url
         const urlName = name.replace(/ /g, "_");
+        
+
+        //Pull item from wiki
         const doc = await retrieveDocument(
             `https://riskofrain2.fandom.com/wiki/${urlName}`
         );
@@ -41,6 +49,8 @@ export class ItemResolver {
                     },
                 ],
             };
+
+        //Grab item's description, image, and caption
         const caption = doc.querySelector(".infoboxcaption")?.textContent;
 
         const description = doc.querySelector(".infoboxdesc")?.textContent;
@@ -58,12 +68,14 @@ export class ItemResolver {
                     },
                 ],
             };
-
+        
+        //Update item
         Object.assign(item, {
             caption,
             description,
             image,
         });
+        //Save item and return
         return await item.save();
     }
 }
