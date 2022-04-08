@@ -56,7 +56,7 @@ const main = async () => {
         res.redirect(apolloServer.graphqlPath);
     });
     app.listen(4000, () => {
-        console.log('server started at http://localhost:4000/graphql');
+        console.log('server started at http://localhost/graphql');
     });
 };
 

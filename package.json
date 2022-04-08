@@ -1,0 +1,22 @@
+{
+  "name": "rainman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docker:down": "docker compose down",
+    "docker:prod": "npm run docker:down && docker compose up --build",
+    "docker:dev": "npm run docker:down && docker compose -f docker-compose.dev.yml up --build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrevorBrown-dev/rainman.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrevorBrown-dev/rainman/issues"
+  },
+  "homepage": "https://github.com/TrevorBrown-dev/rainman#readme"
+}

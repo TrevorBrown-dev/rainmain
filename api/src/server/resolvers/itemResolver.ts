@@ -6,7 +6,8 @@ import { Item } from "../entities/Item";
 @Resolver(Item)
 export class ItemResolver {
     @Query(() => Item)
-    async item(@Arg("name") name: string): Promise<Item | undefined> {
+    async item(@Arg("name") weakName: string): Promise<Item | undefined> {
+        const { name } = spellCheck(weakName, await Item.find());
         return await Item.findOne({ where: { name } });
     }
 
