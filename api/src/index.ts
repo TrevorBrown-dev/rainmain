@@ -7,6 +7,8 @@ import { createConnection } from 'typeorm';
 import { getAllNames } from './crawler/init/GetAllNames';
 import { getItemNames } from './crawler/init/GetItemNames';
 import ormConfig from './ormconfig';
+import { Artifact } from './server/entities/artifact';
+import { ArtifactResolver } from './server/resolvers/artifactResolver';
 import { ItemResolver } from './server/resolvers/itemResolver';
 import { MonsterResolver } from './server/resolvers/monsterResolver';
 import { NameResolver } from './server/resolvers/nameResolver';
@@ -20,7 +22,8 @@ getAllNames();
 
 const resolverList: NonEmptyArray<Function> | NonEmptyArray<string> = [
     ItemResolver,
-    MonsterResolver
+    MonsterResolver,
+    ArtifactResolver,
 ];
 
 const main = async () => {
