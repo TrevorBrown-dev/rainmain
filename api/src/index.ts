@@ -4,9 +4,11 @@ import cors from 'cors';
 import express from 'express';
 import { buildSchema, NonEmptyArray } from 'type-graphql';
 import { createConnection } from 'typeorm';
+import { getAllNames } from './crawler/init/GetAllNames';
 import { getItemNames } from './crawler/init/GetItemNames';
 import ormConfig from './ormconfig';
 import { ItemResolver } from './server/resolvers/itemResolver';
+import { MonsterResolver } from './server/resolvers/monsterResolver';
 import { NameResolver } from './server/resolvers/nameResolver';
 import { MyContext } from './types';
 // const doc = await retrieveDocument('https://riskofrain2.fandom.com/wiki/Items');
@@ -14,11 +16,11 @@ import { MyContext } from './types';
 //     console.log(div.textContent);
 // });
 
-getItemNames();
+getAllNames();
 
 const resolverList: NonEmptyArray<Function> | NonEmptyArray<string> = [
     ItemResolver,
-    NameResolver,
+    MonsterResolver
 ];
 
 const main = async () => {

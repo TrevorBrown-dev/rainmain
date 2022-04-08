@@ -1,5 +1,7 @@
 import { createConnection } from 'typeorm';
 import { Item } from './server/entities/Item';
+import { Monster } from './server/entities/Monster';
+import { MonsterStat } from './server/entities/MonsterStat';
 import { Name } from './server/entities/Name';
 
 export default {
@@ -9,7 +11,7 @@ export default {
     username: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || 'postgres',
     database: process.env.DB_NAME || 'postgres',
-    entities: [Item, Name],
+    entities: [Item, Monster, MonsterStat],
     synchronize: true, //? probably should comment out in production
     // logging: true, //? turn on if you wanna look at sql
 

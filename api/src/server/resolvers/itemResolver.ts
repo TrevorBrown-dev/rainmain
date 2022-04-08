@@ -1,4 +1,5 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { formatTextItem } from "../../utils/formatTexts/formatTextItem";
 import { retrieveDocument } from "../../utils/retrieveDocument";
 import { spellCheck } from "../../utils/spellCheck";
 import { Item } from "../entities/Item";
@@ -72,8 +73,8 @@ export class ItemResolver {
         
         //Update item
         Object.assign(item, {
-            caption,
-            description,
+            caption: formatTextItem(caption),
+            description: formatTextItem(description),
             image,
         });
         //Save item and return

@@ -5,7 +5,7 @@ services:
             context: ./db
             dockerfile: Dockerfile
         volumes:
-            - ./db/data/postgres:/var/lib/postgresql/data
+            - db_data:/var/lib/postgresql/data
         environment:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
@@ -40,3 +40,6 @@ services:
         command: nginx -g 'daemon off;'
         ports:
             - '80:80'
+
+volumes:
+    db_data:
