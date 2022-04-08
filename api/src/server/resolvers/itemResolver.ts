@@ -16,6 +16,8 @@ export class ItemResolver {
 
     @Mutation(() => Item)
     async pullItem(@Arg("name") name: string): Promise<Item> {
+        //! implement spellChecking
+        
         const item = await Item.findOne({ where: { name } });
         if (!item)
             throw {
