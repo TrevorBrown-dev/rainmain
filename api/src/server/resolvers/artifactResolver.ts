@@ -1,6 +1,6 @@
 import { Arg, Query, Resolver } from "type-graphql";
 import { spellCheck } from "../../utils/spellCheck";
-import { Artifact } from "../entities/artifact";
+import { Artifact } from "../entities/Artifact";
 
 @Resolver(Artifact)
 export class ArtifactResolver {

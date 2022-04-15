@@ -35,3 +35,21 @@ export class Name extends BaseEntity {
     @Column()
     type!: NameTypes;
 }
+
+//! I seee no reason for having this entity except for testing.
+//Therefore I am going to implement name on the item entity.
+// @ObjectType()
+// @Entity()
+// export class Name extends BaseEntity {
+//     @Field(() => Number)
+//     @PrimaryGeneratedColumn()
+//     id!: number;
+
+// @Field(() => String)
+// @Column()
+// name!: string;
+
+// @Field(() => NameTypes)
+// @Column()
+// type!: NameTypes;
+// }
